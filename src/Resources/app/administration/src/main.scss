@@ -19,10 +19,11 @@ $dark-bg-alternate: lighten($dark-bg-color, 5);
         &:not(.sw-icon) {
         &:not(.sw-color-badge) {
         &:not(.sw-pagination__list-button) {
+        &:not(.sw-product-image__context-button) {
         &:not([class^="sw-field__switch-state"]) {
             background-color: $bg!important;
             color: $text!important;
-        }}}}}}}}}}}}}}}
+        }}}}}}}}}}}}}}}}
         &:not([class^="sw-button"]) {
         &:not(.sw-tabs__slider) {
         &:not([class^="ace"]) {
@@ -60,6 +61,13 @@ body.is-dark-mode {
 
     .sw-context-menu {
         .sw-context-menu__content:before {
+            background-color: $dark-bg-color!important;
+            border-color: $dark-border-color!important;
+        }
+    }
+
+    .sw-text-editor-toolbar-button {
+        .sw-text-editor-toolbar-button__children:before {
             background-color: $dark-bg-color!important;
             border-color: $dark-border-color!important;
         }
