@@ -18,7 +18,9 @@ $background-excludes: (
     '.sw-color-badge',
     '.sw-pagination__list-button',
     '.sw-product-image__context-button',
-    '[class^="sw-field__switch-state"]'
+    '[class^="sw-field__switch-state"]',
+    '.sw-select-result-list',
+    '.sw-select-result-list-popover'
 );
 $border-excludes: (
     '[class^="sw-button"]',
