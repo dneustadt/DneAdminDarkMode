@@ -3,46 +3,48 @@ $dark-text-color: #eeeeee;
 $dark-border-color: #333333;
 $dark-bg-alternate: lighten($dark-bg-color, 5);
 
+@mixin colorOverwrites($bg, $text, $border) {
+    * {
+        &:not(svg) {
+        &:not(path) {
+        &:not([class^="sw-button"]) {
+        &:not(.sw-tabs__slider) {
+        &:not([class^="ace"]) {
+        &:not(.sw-cms-block__config-overlay) {
+        &:not(.sw-cms-slot__preview-overlay) {
+        &:not(.sw-cms-slot__overlay) {
+        &:not(.sw-cms-stage-add-block__handle) {
+        &:not(.sw-cms-stage-add-block ) {
+        &:not(.sw-media-folder-item__folder-thumbnails) {
+        &:not(.sw-icon) {
+        &:not([class^="sw-field__switch-state"]) {
+            background-color: $bg!important;
+            color: $text!important;
+        }}}}}}}}}}}}}
+        &:not([class^="sw-button"]) {
+        &:not(.sw-tabs__slider) {
+        &:not([class^="ace"]) {
+        &:not(.sw-page__head-area) {
+            border-color: $border!important;
+        }}}}
+    }
+}
+
 body.is-dark-mode {
     .sw-modal__dialog,
     .sw-popover__wrapper,
     .sw-desktop__content {
-        * {
-            &:not(svg) {
-            &:not(path) {
-            &:not([class^="sw-button"]) {
-            &:not(.sw-tabs__slider) {
-            &:not([class^="ace"]) {
-            &:not(.sw-cms-block__config-overlay) {
-            &:not(.sw-cms-slot__preview-overlay) {
-            &:not(.sw-cms-slot__overlay) {
-            &:not(.sw-cms-stage-add-block__handle) {
-            &:not(.sw-cms-stage-add-block ) {
-            &:not(.sw-media-folder-item__folder-thumbnails) {
-            &:not(.sw-icon) {
-            &:not([class^="sw-field__switch-state"]) {
-                background-color: $dark-bg-color!important;
-                color: $dark-text-color!important;
+        @include colorOverwrites($dark-bg-color, $dark-text-color, $dark-border-color);
+    }
 
-                .sw-data-grid {
-                    .sw-data-grid__body {
-                        .sw-data-grid__row:nth-child(2n) {
-                            .sw-data-grid__cell {
-                                background-color: $dark-bg-alternate!important;
-                                * {
-                                    background-color: $dark-bg-alternate!important;
-                                }
-                            }
-                        }
-                    }
+    .sw-data-grid {
+        .sw-data-grid__body {
+            .sw-data-grid__row:nth-child(2n) {
+                .sw-data-grid__cell {
+                    background-color: $dark-bg-alternate!important;
+                    @include colorOverwrites($dark-bg-alternate, $dark-text-color, $dark-border-color);
                 }
-            }}}}}}}}}}}}}
-            &:not([class^="sw-button"]) {
-            &:not(.sw-tabs__slider) {
-            &:not([class^="ace"]) {
-            &:not(.sw-page__head-area) {
-                border-color: $dark-border-color!important;
-            }}}}
+            }
         }
     }
 
