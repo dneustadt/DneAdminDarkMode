@@ -17,10 +17,12 @@ $dark-bg-alternate: lighten($dark-bg-color, 5);
         &:not(.sw-cms-stage-add-block ) {
         &:not(.sw-media-folder-item__folder-thumbnails) {
         &:not(.sw-icon) {
+        &:not(.sw-color-badge) {
+        &:not(.sw-pagination__list-button) {
         &:not([class^="sw-field__switch-state"]) {
             background-color: $bg!important;
             color: $text!important;
-        }}}}}}}}}}}}}
+        }}}}}}}}}}}}}}}
         &:not([class^="sw-button"]) {
         &:not(.sw-tabs__slider) {
         &:not([class^="ace"]) {
