@@ -1,0 +1,8 @@
+{
+    "name": "dneadmindarkmode",
+    "version": "1.0.0",
+    "description": "Administration Dark Mode",
+    "main": "main.js",
+    "author": "David Neustadt",
+    "license": "MIT"
+}

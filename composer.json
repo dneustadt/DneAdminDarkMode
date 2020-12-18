@@ -1,0 +1,53 @@
+{
+    "name": "dne/admin-dark-mode",
+    "description": "Administration Dark Mode",
+    "version": "1.0.0",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "~v6.3.0"
+    },
+    "authors": [
+        {
+            "name": "David Neustadt"
+        }
+    ],
+    "extra": {
+        "shopware-plugin-class": "Dne\\AdminDarkMode\\DneAdminDarkMode",
+        "copyright": "(c) David Neustadt",
+        "label": {
+            "de-DE": "Administration Dark Mode",
+            "en-GB": "Administration Dark Mode"
+        },
+        "description": {
+            "de-DE": "",
+            "en-GB": ""
+        },
+        "manufacturerLink": {
+            "de-DE": "https://store.shopware.com/david-neustadt.html",
+            "en-GB": "https://store.shopware.com/en/david-neustadt.html"
+        },
+        "supportLink": {
+            "de-DE": "https://davidneustadt.de",
+            "en-GB": "https://neustadt.dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Dne\\AdminDarkMode\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dne\\AdminDarkMode\\Test\\": "tests/"
+        }
+    },
+    "suggest": {
+        "shopware/storefront": "Require '6.3'.",
+        "shopware/administration": "Require '6.3'. Allows you to to set up the plugin easily"
+    },
+    "conflict": {
+        "shopware/storefront": "<6,>=7",
+        "shopware/administration": "<6,>=7"
+    }
+}

@@ -1,0 +1,6 @@
+{% sw_extends 'administration/index.html.twig' %}
+
+{% block administration_scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/dneadmindarkmode/administration/js/dne-admin-dark-mode.js') }}"></script>
+{% endblock %}

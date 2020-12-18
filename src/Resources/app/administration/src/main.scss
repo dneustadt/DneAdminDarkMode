@@ -1,0 +1,73 @@
+$dark-bg-color: #111111;
+$dark-text-color: #eeeeee;
+$dark-border-color: #333333;
+$dark-bg-alternate: lighten($dark-bg-color, 5);
+
+body.is-dark-mode {
+    .sw-modal__dialog,
+    .sw-popover__wrapper,
+    .sw-desktop__content {
+        * {
+            &:not(svg) {
+            &:not(path) {
+            &:not([class^="sw-button"]) {
+            &:not(.sw-tabs__slider) {
+            &:not([class^="ace"]) {
+            &:not(.sw-cms-block__config-overlay) {
+            &:not(.sw-cms-slot__preview-overlay) {
+            &:not(.sw-cms-slot__overlay) {
+            &:not(.sw-cms-stage-add-block__handle) {
+            &:not(.sw-cms-stage-add-block ) {
+            &:not(.sw-media-folder-item__folder-thumbnails) {
+            &:not(.sw-icon) {
+            &:not([class^="sw-field__switch-state"]) {
+                background-color: $dark-bg-color!important;
+                color: $dark-text-color!important;
+
+                .sw-data-grid {
+                    .sw-data-grid__body {
+                        .sw-data-grid__row:nth-child(2n) {
+                            .sw-data-grid__cell {
+                                background-color: $dark-bg-alternate!important;
+                                * {
+                                    background-color: $dark-bg-alternate!important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }}}}}}}}}}}}}
+            &:not([class^="sw-button"]) {
+            &:not(.sw-tabs__slider) {
+            &:not([class^="ace"]) {
+            &:not(.sw-page__head-area) {
+                border-color: $dark-border-color!important;
+            }}}}
+        }
+    }
+
+    .sw-popover__wrapper {
+        .sw-data-grid__settings-column-item-controls {
+            .sw-button {
+                background: transparent;
+            }
+        }
+    }
+
+    .sw-context-menu {
+        .sw-context-menu__content:before {
+            background-color: $dark-bg-color!important;
+            border-color: $dark-border-color!important;
+        }
+    }
+}
+
+.dne-dark-mode {
+    .sw-icon {
+        float: left
+    }
+    .sw-field--switch {
+        float: left;
+        margin: -10px 10px 0 5px;
+    }
+}
