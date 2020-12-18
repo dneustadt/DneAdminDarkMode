@@ -2,34 +2,53 @@ $dark-bg-color: #111111;
 $dark-text-color: #eeeeee;
 $dark-border-color: #333333;
 $dark-bg-alternate: lighten($dark-bg-color, 5);
+$background-excludes: (
+    'svg',
+    'path',
+    '[class^="sw-button"]',
+    '.sw-tabs__slider',
+    '[class^="ace"]',
+    '.sw-cms-block__config-overlay',
+    '.sw-cms-slot__preview-overlay',
+    '.sw-cms-slot__overlay',
+    '.sw-cms-stage-add-block__handle',
+    '.sw-cms-stage-add-block',
+    '.sw-media-folder-item__folder-thumbnails',
+    '.sw-icon',
+    '.sw-color-badge',
+    '.sw-pagination__list-button',
+    '.sw-product-image__context-button',
+    '[class^="sw-field__switch-state"]'
+);
+$border-excludes: (
+    '[class^="sw-button"]',
+    '.sw-tabs__slider',
+    '[class^="ace"]',
+    '.sw-page__head-area'
+);
 
 @mixin colorOverwrites($bg, $text, $border) {
-    * {
-        &:not(svg) {
-        &:not(path) {
-        &:not([class^="sw-button"]) {
-        &:not(.sw-tabs__slider) {
-        &:not([class^="ace"]) {
-        &:not(.sw-cms-block__config-overlay) {
-        &:not(.sw-cms-slot__preview-overlay) {
-        &:not(.sw-cms-slot__overlay) {
-        &:not(.sw-cms-stage-add-block__handle) {
-        &:not(.sw-cms-stage-add-block ) {
-        &:not(.sw-media-folder-item__folder-thumbnails) {
-        &:not(.sw-icon) {
-        &:not(.sw-color-badge) {
-        &:not(.sw-pagination__list-button) {
-        &:not(.sw-product-image__context-button) {
-        &:not([class^="sw-field__switch-state"]) {
-            background-color: $bg!important;
-            color: $text!important;
-        }}}}}}}}}}}}}}}}
-        &:not([class^="sw-button"]) {
-        &:not(.sw-tabs__slider) {
-        &:not([class^="ace"]) {
-        &:not(.sw-page__head-area) {
-            border-color: $border!important;
-        }}}}
+    $sel: '*';
+    @for $i from 1 through length($background-excludes) {
+        $sel: selector-nest($sel, '&:not(#{nth($background-excludes, $i)})');
+
+        @if nth($background-excludes, length($background-excludes)) == nth($background-excludes, $i) {
+            #{$sel} {
+                background-color: $bg!important;
+                color: $text!important;
+            }
+        }
+    }
+
+    $sel: '*';
+    @for $i from 1 through length($border-excludes) {
+        $sel: selector-nest($sel, '&:not(#{nth($border-excludes, $i)})');
+
+        @if nth($border-excludes, length($border-excludes)) == nth($border-excludes, $i) {
+            #{$sel} {
+                border-color: $border!important;
+            }
+        }
     }
 }
 
