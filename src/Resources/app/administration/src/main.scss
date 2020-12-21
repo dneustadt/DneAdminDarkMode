@@ -20,7 +20,8 @@ $background-excludes: (
     '.sw-product-image__context-button',
     '[class^="sw-field__switch-state"]',
     '.sw-select-result-list',
-    '.sw-select-result-list-popover'
+    '.sw-select-result-list-popover',
+    '.sw-colorpicker__previewColor'
 );
 $border-excludes: (
     '[class^="sw-button"]',
@@ -96,8 +97,10 @@ body.is-dark-mode {
 }
 
 .dne-dark-mode {
+    min-width: 65px;
+
     .sw-icon {
-        float: left
+        float: left;
     }
     .sw-field--switch {
         float: left;
