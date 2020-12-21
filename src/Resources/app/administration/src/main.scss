@@ -1,3 +1,5 @@
+@import "states";
+
 $dark-bg-color: #111111;
 $dark-text-color: #eeeeee;
 $dark-border-color: #333333;
@@ -21,7 +23,8 @@ $background-excludes: (
     '[class^="sw-field__switch-state"]',
     '.sw-select-result-list',
     '.sw-select-result-list-popover',
-    '.sw-colorpicker__previewColor'
+    '.sw-colorpicker__previewColor',
+    '.sw-field__error'
 );
 $border-excludes: (
     '[class^="sw-button"]',
