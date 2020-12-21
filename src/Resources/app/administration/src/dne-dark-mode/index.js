@@ -1,7 +1,6 @@
 import template from './dne-dark-mode.html.twig';
 
 const { Component } = Shopware;
-const isDarkMode = localStorage.getItem('isDarkMode') === 'true';
 const darkModeClsSetter = (mode) => {
     if (mode) {
         document.body.classList.add('is-dark-mode');
@@ -14,7 +13,7 @@ Component.register('dne-dark-mode', {
     template,
     data() {
         return {
-            isDarkMode: isDarkMode
+            isDarkMode: false
         };
     },
     watch: {
@@ -23,7 +22,10 @@ Component.register('dne-dark-mode', {
 
             darkModeClsSetter(mode);
         }
+    },
+    created() {
+        this.isDarkMode = localStorage.getItem('isDarkMode') === 'true';
     }
 });
 
-darkModeClsSetter(isDarkMode);
+darkModeClsSetter(localStorage.getItem('isDarkMode') === 'true');
