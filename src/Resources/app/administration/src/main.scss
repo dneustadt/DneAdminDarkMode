@@ -81,18 +81,11 @@ body.is-dark-mode {
         }
     }
 
-    .sw-context-menu {
-        .sw-context-menu__content:before {
-            background-color: $dark-bg-color!important;
-            border-color: $dark-border-color!important;
-        }
-    }
-
-    .sw-text-editor-toolbar-button {
-        .sw-text-editor-toolbar-button__children:before {
-            background-color: $dark-bg-color!important;
-            border-color: $dark-border-color!important;
-        }
+    .sw-colorpicker__colorpicker:before,
+    .sw-context-menu .sw-context-menu__content:before,
+    .sw-text-editor-toolbar-button .sw-text-editor-toolbar-button__children:before {
+        background-color: $dark-bg-color!important;
+        border-color: $dark-border-color!important;
     }
 }
 
