@@ -1,37 +1,5 @@
 @import "states";
-
-$dark-bg-color: #111111;
-$dark-text-color: #eeeeee;
-$dark-border-color: #333333;
-$dark-bg-alternate: lighten($dark-bg-color, 5);
-$background-excludes: (
-    'svg',
-    'path',
-    '[class^="sw-button"]',
-    '.sw-tabs__slider',
-    '[class^="ace"]',
-    '.sw-cms-block__config-overlay',
-    '.sw-cms-slot__preview-overlay',
-    '.sw-cms-slot__overlay',
-    '.sw-cms-stage-add-block__handle',
-    '.sw-cms-stage-add-block',
-    '.sw-media-folder-item__folder-thumbnails',
-    '.sw-icon',
-    '.sw-color-badge',
-    '.sw-pagination__list-button',
-    '.sw-product-image__context-button',
-    '[class^="sw-field__switch-state"]',
-    '.sw-select-result-list',
-    '.sw-select-result-list-popover',
-    '.sw-colorpicker__previewColor',
-    '.sw-field__error'
-);
-$border-excludes: (
-    '[class^="sw-button"]',
-    '.sw-tabs__slider',
-    '[class^="ace"]',
-    '.sw-page__head-area'
-);
+@import "variables";
 
 @mixin colorOverwrites($bg, $text, $border) {
     $sel: '*';
@@ -68,10 +36,7 @@ body.is-dark-mode {
     .sw-data-grid {
         .sw-data-grid__body {
             .sw-data-grid__row:nth-child(2n) {
-                .sw-data-grid__cell {
-                    background-color: $dark-bg-alternate!important;
-                    @include colorOverwrites($dark-bg-alternate, $dark-text-color, $dark-border-color);
-                }
+                @include colorOverwrites($dark-bg-alternate, $dark-text-color, $dark-border-color);
             }
         }
     }

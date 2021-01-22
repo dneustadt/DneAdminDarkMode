@@ -1,4 +1,5 @@
 @import "~scss/variables";
+@import "variables";
 
 body.is-dark-mode {
     #app {
@@ -67,6 +68,18 @@ body.is-dark-mode {
             &.has--error {
                 background-color: $color-crimson-500!important;
             }
+        }
+
+        .sw-block-field {
+            input:disabled,
+            select:disabled,
+            textarea:disabled {
+                background-color: $dark-bg-inactive!important;
+                color: $dark-text-inactive!important;
+            }
+        }
+        .sw-customer-card .sw-customer-card__tag-select.is--disabled input {
+            background-color: transparent!important;
         }
     }
 }
