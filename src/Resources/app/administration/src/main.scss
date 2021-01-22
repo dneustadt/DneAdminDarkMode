@@ -39,6 +39,9 @@ body.is-dark-mode {
                 @include colorOverwrites($dark-bg-alternate, $dark-text-color, $dark-border-color);
             }
         }
+        .sw-data-grid__cell--actions {
+            box-shadow: none;
+        }
     }
 
     .sw-popover__wrapper {
