@@ -58,6 +58,19 @@ body.is-dark-mode {
         background-color: $dark-bg-color!important;
         border-color: $dark-border-color!important;
     }
+
+    .sw-arrow-field__arrow {
+        path {
+            fill: $dark-bg-color!important;
+        }
+    }
+
+    .sw-button.sw-condition-or-container__actions--delete {
+        background-color: $dark-bg-color!important;
+    }
+
+    @import "ace";
+    @import "flatpickr";
 }
 
 .dne-dark-mode {

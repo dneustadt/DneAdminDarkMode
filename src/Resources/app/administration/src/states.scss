@@ -97,13 +97,4 @@ body.is-dark-mode {
             }
         }
     }
-    .sw-arrow-field__arrow {
-        path {
-            fill: $dark-bg-color!important;
-        }
-    }
-    .sw-button.sw-condition-or-container__actions--delete {
-        background-color: $dark-bg-color!important;
-    }
-    @import "ace";
 }
