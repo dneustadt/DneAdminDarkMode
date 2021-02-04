@@ -46,6 +46,14 @@ body.is-dark-mode {
                     border-color: $color-crimson!important;
                 }
             }
+            &.is--disabled {
+                .sw-block-field__block {
+                    background-color: $dark-bg-inactive!important;
+                    * {
+                        background-color: $dark-bg-inactive!important;
+                    }
+                }
+            }
         }
 
         .sw-field--switch {
@@ -81,5 +89,21 @@ body.is-dark-mode {
         .sw-customer-card .sw-customer-card__tag-select.is--disabled input {
             background-color: transparent!important;
         }
+
+        .sw-description-list {
+            dd:last-of-type,
+            dt:last-of-type {
+                border-bottom-color: transparent!important;
+            }
+        }
     }
+    .sw-arrow-field__arrow {
+        path {
+            fill: $dark-bg-color!important;
+        }
+    }
+    .sw-button.sw-condition-or-container__actions--delete {
+        background-color: $dark-bg-color!important;
+    }
+    @import "ace";
 }

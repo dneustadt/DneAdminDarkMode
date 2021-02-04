@@ -27,7 +27,7 @@
 }
 
 body.is-dark-mode {
-    .sw-modal__dialog,
+    .sw-modal,
     .sw-popover__wrapper,
     .sw-desktop__content {
         @include colorOverwrites($dark-bg-color, $dark-text-color, $dark-border-color);
