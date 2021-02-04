@@ -46,7 +46,7 @@ body.is-dark-mode {
                     border-color: $color-crimson!important;
                 }
             }
-            &.is--disabled {
+            &:not(.sw-customer-card__tag-select).is--disabled {
                 .sw-block-field__block {
                     background-color: $dark-bg-inactive!important;
                     * {
