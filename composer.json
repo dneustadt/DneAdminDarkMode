@@ -1,7 +1,7 @@
 {
     "name": "dne/admin-dark-mode",
     "description": "Administration Dark Mode",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "require": {
@@ -9,7 +9,7 @@
     },
     "authors": [
         {
-            "name": "David Neustadt"
+            "name": "Open Source Plugins"
         }
     ],
     "extra": {
@@ -24,12 +24,12 @@
             "en-GB": "Dark Mode in the administration"
         },
         "manufacturerLink": {
-            "de-DE": "https://store.shopware.com/david-neustadt.html",
-            "en-GB": "https://store.shopware.com/en/david-neustadt.html"
+            "de-DE": "https://store.shopware.com/open-source-plugins.html",
+            "en-GB": "https://store.shopware.com/en/open-source-plugins.html"
         },
         "supportLink": {
-            "de-DE": "https://davidneustadt.de",
-            "en-GB": "https://neustadt.dev"
+            "de-DE": "https://github.com/dneustadt",
+            "en-GB": "https://github.com/dneustadt"
         }
     },
     "autoload": {

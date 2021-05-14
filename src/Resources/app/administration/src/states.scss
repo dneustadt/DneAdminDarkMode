@@ -14,7 +14,7 @@ body.is-dark-mode {
         .sw-block-field {
             &.has--error {
                 .sw-block-field__block {
-                    border-color: $color-crimson!important;
+                    border-color: $color-crimson-500!important;
                 }
             }
         }
@@ -22,7 +22,7 @@ body.is-dark-mode {
         .sw-field--checkbox {
             &.has--error {
                 .sw-field__checkbox-state {
-                    border-color: $color-crimson!important;
+                    border-color: $color-crimson-500!important;
                 }
             }
         }
@@ -30,7 +30,7 @@ body.is-dark-mode {
         .sw-field--radio {
             &.has--error {
                 .sw-field__radio-state {
-                    border-color: $color-crimson!important;
+                    border-color: $color-crimson-500!important;
                 }
             }
         }
@@ -38,12 +38,12 @@ body.is-dark-mode {
         .sw-select {
             &.has--error {
                 .sw-select__label {
-                    color: $color-crimson!important;
+                    color: $color-crimson-500!important;
                 }
 
                 .sw-select__inner,
                 .sw-select__results {
-                    border-color: $color-crimson!important;
+                    border-color: $color-crimson-500!important;
                 }
             }
             &:not(.sw-customer-card__tag-select).is--disabled {
@@ -59,7 +59,7 @@ body.is-dark-mode {
         .sw-field--switch {
             &.has--error {
                 .sw-field__switch-state {
-                    background-color: $color-crimson!important;
+                    background-color: $color-crimson-500!important;
                 }
             }
         }
