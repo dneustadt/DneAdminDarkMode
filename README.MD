@@ -15,6 +15,11 @@ Requirements
 * 1.0.0
   * Shopware >= 6.3
 
+Screenshots
+-----
+![Dark Mode Product Listing](https://github.com/dneustadt/DneAdminDarkMode/blob/main/dist/admin-dark-mode-1.png?raw=true)
+![Dark Mode Product Editing](https://github.com/dneustadt/DneAdminDarkMode/blob/main/dist/admin-dark-mode-2.png?raw=true)
+
 Installation
 ====
 Clone this repository into a folder called **DneAdminDarkMode** within the **custom/plugins** directory of the Shopware installation.

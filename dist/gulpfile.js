@@ -4,9 +4,8 @@ const rename = require('gulp-rename');
 const concat = require('gulp-concat');
 const replace = require('gulp-replace');
 const fs = require('fs');
-
-// read a file line-by-line
 const lineReader = require('line-reader');
+const stripCssComments = require('gulp-strip-css-comments');
 
 gulp.task('default', (done) => {
     new Promise((resolve) => {
@@ -25,9 +24,11 @@ gulp.task('default', (done) => {
         .pipe(concat('app.scss'))
         .pipe(replace('$sw-condition-and-container-background-odd: #f0f2f5', '$sw-condition-and-container-background-odd: $color-gray-100'))
         .pipe(replace('$sw-condition-or-container-background-odd: #f0f2f5', '$sw-condition-or-container-background-odd: $color-gray-100'))
+        .pipe(replace('$sw-loader-color-overlay: rgba(255, 255, 255, 0.8)', '$sw-loader-color-overlay: rgba($color-white, 0.8)'))
         .pipe(replace('background-color: #f9fafb', 'background-color: $color-gray-50'))
         .pipe(replace('background-color: white', 'background-color: $color-white'))
-        .pipe(replace('$sw-loader-color-overlay: rgba(255, 255, 255, 0.8)', '$sw-loader-color-overlay: rgba($color-white, 0.8)'))
+        .pipe(replace('#f8f9fa', '$color-gray-50'))
+        .pipe(stripCssComments())
         .pipe(gulp.dest('.'))
         .on('end', resolve);
     }).then(() => {
@@ -53,7 +54,6 @@ gulp.task('default', (done) => {
                 fs.writeFileSync('temp.scss', s);
 
                 gulp.src('temp.scss')
-                    // gulp-sass gets rid of the empty ruleset automatically!
                     .pipe(sass().on('error', sass.logError))
                     .pipe(replace(/^body/m, '&'))
                     .pipe(rename('./../src/Resources/app/administration/src/colors.scss'))
