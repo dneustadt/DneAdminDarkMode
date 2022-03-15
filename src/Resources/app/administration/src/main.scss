@@ -1,76 +1,18 @@
-@import "states";
-@import "variables";
-
-@mixin colorOverwrites($bg, $text, $border) {
-    $sel: '*';
-    @for $i from 1 through length($background-excludes) {
-        $sel: selector-nest($sel, '&:not(#{nth($background-excludes, $i)})');
-
-        @if nth($background-excludes, length($background-excludes)) == nth($background-excludes, $i) {
-            #{$sel} {
-                background-color: $bg!important;
-                color: $text!important;
-            }
-        }
-    }
-
-    $sel: '*';
-    @for $i from 1 through length($border-excludes) {
-        $sel: selector-nest($sel, '&:not(#{nth($border-excludes, $i)})');
-
-        @if nth($border-excludes, length($border-excludes)) == nth($border-excludes, $i) {
-            #{$sel} {
-                border-color: $border!important;
-            }
-        }
-    }
-}
-
-body.is-dark-mode {
-    .sw-modal,
-    .sw-popover__wrapper,
-    .sw-desktop__content {
-        @include colorOverwrites($dark-bg-color, $dark-text-color, $dark-border-color);
-    }
-
-    .sw-data-grid {
-        .sw-data-grid__body {
-            .sw-data-grid__row:nth-child(2n) {
-                @include colorOverwrites($dark-bg-alternate, $dark-text-color, $dark-border-color);
-            }
-        }
-        .sw-data-grid__cell--actions {
-            box-shadow: none;
-        }
-    }
-
-    .sw-popover__wrapper {
-        .sw-data-grid__settings-column-item-controls {
-            .sw-button {
-                background: transparent;
-            }
-        }
-    }
-
-    .sw-colorpicker__colorpicker:before,
-    .sw-context-menu .sw-context-menu__content:before,
-    .sw-text-editor-toolbar-button .sw-text-editor-toolbar-button__children:before {
-        background-color: $dark-bg-color!important;
-        border-color: $dark-border-color!important;
-    }
-
-    .sw-arrow-field__arrow {
-        path {
-            fill: $dark-bg-color!important;
-        }
-    }
-
-    .sw-button.sw-condition-or-container__actions--delete {
-        background-color: $dark-bg-color!important;
-    }
-
+body:where(.is-dark-mode) {
+    @import "colors";
     @import "ace";
     @import "flatpickr";
+
+    .sw-version {
+        .sw-version__title,
+        .sw-version__info {
+            color: #fff;
+        }
+    }
+
+    .sw-sales-channel-menu .sw-admin-menu__headline .sw-admin-menu__headline_text a {
+        color: #fff;
+    }
 }
 
 .dne-dark-mode {

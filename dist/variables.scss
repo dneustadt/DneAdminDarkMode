@@ -1,0 +1,89 @@
+$this: '';
+
+$color-gray-50: lighten($color-gray-50, 95%);
+$color-gray-100: lighten($color-gray-100, 87.5%);
+$color-gray-200: lighten($color-gray-200, 80%);
+$color-gray-300: lighten($color-gray-300, 70%);
+$color-gray-400: lighten($color-gray-400, 60%);
+$color-gray-500: lighten($color-gray-500, 50%);
+$color-gray-600: lighten($color-gray-600, 40%);
+$color-gray-700: lighten($color-gray-700, 30%);
+$color-gray-800: lighten($color-gray-800, 20%);
+$color-gray-900: lighten($color-gray-900, 10%);
+
+$color-darkgray-50: darken($color-darkgray-50, 10%);
+$color-darkgray-100: darken($color-darkgray-100, 20%);
+$color-darkgray-200: darken($color-darkgray-200, 30%);
+$color-darkgray-300: darken($color-darkgray-300, 40%);
+$color-darkgray-400: darken($color-darkgray-400, 50%);
+$color-darkgray-500: darken($color-darkgray-500, 60%);
+$color-darkgray-600: darken($color-darkgray-600, 70%);
+$color-darkgray-700: darken($color-darkgray-700, 80%);
+$color-darkgray-800: darken($color-darkgray-800, 87.5%);
+$color-darkgray-900: darken($color-darkgray-900, 95%);
+
+$color-shopware-brand-50: lighten($color-shopware-brand-50, 80%);
+$color-shopware-brand-100: lighten($color-shopware-brand-100, 60%);
+$color-shopware-brand-200: lighten($color-shopware-brand-200, 40%);
+$color-shopware-brand-300: lighten($color-shopware-brand-300, 30%);
+$color-shopware-brand-400: lighten($color-shopware-brand-400, 10%);
+
+$color-menu-start: darken(#303a4f, 20%);
+$color-menu-end: darken(#2a3345, 20%);
+
+$color-emerald-50: lighten($color-emerald-50, 80%);
+$color-emerald-100: lighten($color-emerald-100, 60%);
+$color-emerald-200: lighten($color-emerald-200, 40%);
+$color-emerald-300: lighten($color-emerald-300, 30%);
+$color-emerald-400: lighten($color-emerald-400, 10%);
+
+$color-pumpkin-spice-50: lighten($color-pumpkin-spice-50, 80%);
+$color-pumpkin-spice-100: lighten($color-pumpkin-spice-100, 60%);
+$color-pumpkin-spice-200: lighten($color-pumpkin-spice-200, 40%);
+$color-pumpkin-spice-300: lighten($color-pumpkin-spice-300, 30%);
+$color-pumpkin-spice-400: lighten($color-pumpkin-spice-400, 10%);
+
+$color-crimson-50: lighten($color-crimson-50, 80%);
+$color-crimson-100: lighten($color-crimson-100, 60%);
+$color-crimson-200: lighten($color-crimson-200, 40%);
+$color-crimson-300: lighten($color-crimson-300, 30%);
+$color-crimson-400: lighten($color-crimson-400, 10%);
+
+$color-module-yellow-50: lighten($color-module-yellow-50, 80%);
+$color-module-yellow-100: lighten($color-module-yellow-100, 60%);
+$color-module-yellow-200: lighten($color-module-yellow-200, 40%);
+$color-module-yellow-300: lighten($color-module-yellow-300, 30%);
+$color-module-yellow-400: lighten($color-module-yellow-400, 10%);
+
+$color-module-orange-50: lighten($color-module-orange-50, 80%);
+$color-module-orange-100: lighten($color-module-orange-100, 60%);
+$color-module-orange-200: lighten($color-module-orange-200, 40%);
+$color-module-orange-300: lighten($color-module-orange-300, 30%);
+$color-module-orange-400: lighten($color-module-orange-400, 10%);
+
+$color-module-pink-50: lighten($color-module-pink-50, 80%);
+$color-module-pink-100: lighten($color-module-pink-100, 60%);
+$color-module-pink-200: lighten($color-module-pink-200, 40%);
+$color-module-pink-300: lighten($color-module-pink-300, 30%);
+$color-module-pink-400: lighten($color-module-pink-400, 10%);
+
+$color-module-blue-50: lighten($color-module-blue-50, 80%);
+$color-module-blue-100: lighten($color-module-blue-100, 60%);
+$color-module-blue-200: lighten($color-module-blue-200, 40%);
+$color-module-blue-300: lighten($color-module-blue-300, 30%);
+$color-module-blue-400: lighten($color-module-blue-400, 10%);
+
+$color-module-purple-50: lighten($color-module-purple-50, 80%);
+$color-module-purple-100: lighten($color-module-purple-100, 60%);
+$color-module-purple-200: lighten($color-module-purple-200, 40%);
+$color-module-purple-300: lighten($color-module-purple-300, 30%);
+$color-module-purple-400: lighten($color-module-purple-400, 10%);
+
+$color-module-green-50: lighten($color-module-green-50, 80%);
+$color-module-green-100: lighten($color-module-green-100, 60%);
+$color-module-green-200: lighten($color-module-green-200, 40%);
+$color-module-green-300: lighten($color-module-green-300, 30%);
+$color-module-green-400: lighten($color-module-green-400, 10%);
+
+$color-white: lighten($color-white, 100%);
+$color-black: darken($color-black, 100%);
