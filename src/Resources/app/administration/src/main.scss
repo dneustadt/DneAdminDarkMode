@@ -2,17 +2,6 @@ body:where(.is-dark-mode) {
     @import "colors";
     @import "ace";
     @import "flatpickr";
-
-    .sw-version {
-        .sw-version__title,
-        .sw-version__info {
-            color: #fff;
-        }
-    }
-
-    .sw-sales-channel-menu .sw-admin-menu__headline .sw-admin-menu__headline_text a {
-        color: #fff;
-    }
 }
 
 .dne-dark-mode {

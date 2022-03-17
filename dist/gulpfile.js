@@ -18,38 +18,34 @@ gulp.task('default', (done) => {
             basePath + '/app/assets/scss/mixins.scss',
             basePath + '/app/assets/scss/typography.scss',
             basePath + '/app/assets/scss/directives/**.scss',
-            basePath + '/app/component/**/**.scss',
+            basePath + '/app/component/**/!(sw-admin-menu).scss',
             basePath + '/module/**/**.scss',
         ])
         .pipe(concat('app.scss'))
-        .pipe(replace('$sw-condition-and-container-background-odd: #f0f2f5', '$sw-condition-and-container-background-odd: $color-gray-100'))
-        .pipe(replace('$sw-condition-or-container-background-odd: #f0f2f5', '$sw-condition-or-container-background-odd: $color-gray-100'))
-        .pipe(replace('$sw-loader-color-overlay: rgba(255, 255, 255, 0.8)', '$sw-loader-color-overlay: rgba($color-white, 0.8)'))
-        .pipe(replace('background-color: #f9fafb', 'background-color: $color-gray-50'))
-        .pipe(replace('background-color: white', 'background-color: $color-white'))
-        .pipe(replace('background-color: #fff', 'background-color: $color-white'))
-        .pipe(replace('background: #fff', 'background: $color-white'))
-        .pipe(replace('background: white', 'background: $color-white'))
-        .pipe(replace('#f8f9fa', '$color-gray-50'))
         .pipe(stripCssComments())
         .pipe(gulp.dest('.'))
         .on('end', resolve);
     }).then(() => {
         let s = '';
 
-        const excludeRegEx = new RegExp('^@import');
-        const propertyRegEx = new RegExp('(.*?):(.*?);');
+        const excludeRegEx = new RegExp('^@import|@include');
+        const propertyRegEx = new RegExp(':(.*?);');
         const variableRegEx = new RegExp('^\\$|\\$color-(.*?)|\\$(.*?)-(color|background|dark|light)');
+        const literalColorRegEx = new RegExp('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(white|black|255, 255, 255)');
+        const colorMappings = JSON.parse(fs.readFileSync('hex-mappings.json'));
+        let replaceColorsLiteral = false;
 
         const readStream = fs.createReadStream('app.scss');
         lineReader.eachLine(readStream, (line, last) => {
-            if (line.match(propertyRegEx)) {
-                if(line.match(variableRegEx)) {
-                    s += line.replace(/lighten\(|darken\(/gi, (matched) => {
-                        return matched === 'darken(' ? 'lighten(' : 'darken(';
-                    }) + "\n";
-                }
-            } else if(!line.match(excludeRegEx)) {
+            replaceColorsLiteral = replaceColorsLiteral || line === '// start replace literal colors';
+
+            if (line.match(excludeRegEx)) {
+                return;
+            }
+
+            const isProperty = line.match(propertyRegEx);
+
+            if (!isProperty) {
                 s += line + "\n";
             }
 
@@ -60,10 +56,33 @@ gulp.task('default', (done) => {
                     .pipe(sass().on('error', sass.logError))
                     .pipe(replace(/^body/m, '&'))
                     .pipe(rename('./../src/Resources/app/administration/src/colors.scss'))
-                    .pipe(gulp.dest('./'));
-
-                done();
+                    .pipe(gulp.dest('./'))
+                    .on('end', done);
             }
-        })
+
+            if (!isProperty) {
+                return;
+            }
+
+            line = replaceColorsLiteral ? line.replace(propertyRegEx, (propertyValue) => {
+                if (propertyValue.match(variableRegEx)) {
+                    return propertyValue;
+                }
+
+                return propertyValue.replace(literalColorRegEx, (matched) => {
+                    if (!colorMappings.hasOwnProperty(matched)) {
+                        throw `Found literal hex code ${matched} at line ${line}`;
+                    }
+
+                    return colorMappings[matched];
+                });
+            }) : line;
+
+            if(line.match(variableRegEx)) {
+                s += line.replace(/lighten\(|darken\(/gi, (matched) => {
+                    return matched === 'darken(' ? 'lighten(' : 'darken(';
+                }) + "\n";
+            }
+        });
     });
 });
