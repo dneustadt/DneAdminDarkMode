@@ -26,11 +26,11 @@ gulp.task('default', (done) => {
         .pipe(gulp.dest('.'))
         .on('end', resolve);
     }).then(() => {
-        let s = '';
+        let s = '@use \'sass:math\';';
 
-        const excludeRegEx = new RegExp('^@import|@include');
+        const excludeRegEx = new RegExp('^@import|@include(?!.* sw-label-variant)');
         const propertyRegEx = new RegExp(':(.*?);');
-        const variableRegEx = new RegExp('^\\$|\\$color-(.*?)|\\$(.*?)-(color|background|dark|light)');
+        const variableRegEx = new RegExp('^\\$|\\$color-(.*?)|\\$(.*?)-(color|background|dark|light)|sw-label-variant\\((.*?)\\)');
         const literalColorRegEx = new RegExp('#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|(white|black|255, 255, 255)');
         const colorMappings = JSON.parse(fs.readFileSync('hex-mappings.json'));
         let replaceColorsLiteral = false;

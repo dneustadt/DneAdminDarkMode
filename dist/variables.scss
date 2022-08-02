@@ -1,27 +1,27 @@
 $this: '';
 
 // start replace literal colors
-$color-gray-50: lighten($color-gray-50, 95%);
-$color-gray-100: lighten($color-gray-100, 87.5%);
-$color-gray-200: lighten($color-gray-200, 80%);
-$color-gray-300: lighten($color-gray-300, 70%);
-$color-gray-400: lighten($color-gray-400, 60%);
-$color-gray-500: lighten($color-gray-500, 50%);
-$color-gray-600: lighten($color-gray-600, 40%);
-$color-gray-700: lighten($color-gray-700, 30%);
-$color-gray-800: lighten($color-gray-800, 20%);
-$color-gray-900: lighten($color-gray-900, 10%);
+$color-gray-50: desaturate(lighten($color-gray-50, 90%), 100%);
+$color-gray-100: desaturate(lighten($color-gray-100, 80%), 100%);
+$color-gray-200: desaturate(lighten($color-gray-200, 70%), 100%);
+$color-gray-300: desaturate(lighten($color-gray-300, 60%), 100%);
+$color-gray-400: desaturate(lighten($color-gray-400, 50%), 100%);
+$color-gray-500: desaturate(lighten($color-gray-500, 40%), 100%);
+$color-gray-600: desaturate(lighten($color-gray-600, 30%), 100%);
+$color-gray-700: desaturate(lighten($color-gray-700, 20%), 100%);
+$color-gray-800: desaturate(lighten($color-gray-800, 10%), 100%);
+$color-gray-900: desaturate(lighten($color-gray-900, 0%), 100%);
 
-$color-darkgray-50: darken($color-darkgray-50, 10%);
-$color-darkgray-100: darken($color-darkgray-100, 20%);
-$color-darkgray-200: darken($color-darkgray-200, 30%);
-$color-darkgray-300: darken($color-darkgray-300, 40%);
-$color-darkgray-400: darken($color-darkgray-400, 50%);
-$color-darkgray-500: darken($color-darkgray-500, 60%);
-$color-darkgray-600: darken($color-darkgray-600, 70%);
-$color-darkgray-700: darken($color-darkgray-700, 80%);
-$color-darkgray-800: darken($color-darkgray-800, 87.5%);
-$color-darkgray-900: darken($color-darkgray-900, 95%);
+$color-darkgray-50: desaturate(darken($color-darkgray-50, 10%), 100%);
+$color-darkgray-100: desaturate(darken($color-darkgray-100, 20%), 100%);
+$color-darkgray-200: desaturate(darken($color-darkgray-200, 30%), 100%);
+$color-darkgray-300: desaturate(darken($color-darkgray-300, 40%), 100%);
+$color-darkgray-400: desaturate(darken($color-darkgray-400, 50%), 100%);
+$color-darkgray-500: desaturate(darken($color-darkgray-500, 60%), 100%);
+$color-darkgray-600: desaturate(darken($color-darkgray-600, 70%), 100%);
+$color-darkgray-700: desaturate(darken($color-darkgray-700, 80%), 100%);
+$color-darkgray-800: desaturate(darken($color-darkgray-800, 87.5%), 100%);
+$color-darkgray-900: desaturate(darken($color-darkgray-900, 95%), 100%);
 
 $color-shopware-brand-50: lighten($color-shopware-brand-50, 80%);
 $color-shopware-brand-100: lighten($color-shopware-brand-100, 60%);
@@ -86,5 +86,5 @@ $color-module-green-200: lighten($color-module-green-200, 40%);
 $color-module-green-300: lighten($color-module-green-300, 30%);
 $color-module-green-400: lighten($color-module-green-400, 10%);
 
-$color-white: lighten($color-white, 100%);
+$color-white: lighten($color-white, 90%);
 $color-black: darken($color-black, 100%);
