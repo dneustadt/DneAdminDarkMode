@@ -1,7 +1,7 @@
 {% block dne_dark_mode %}
     <div class="dne-dark-mode">
-        <sw-icon name="default-action-moon" v-if="isDarkMode"></sw-icon>
-        <sw-icon name="default-action-sun" v-else></sw-icon>
+        <sw-icon class="sw-context-button" name="default-action-moon" v-if="isDarkMode"></sw-icon>
+        <sw-icon class="sw-context-button" name="default-action-sun" v-else></sw-icon>
         <sw-switch-field v-model="isDarkMode"></sw-switch-field>
     </div>
 {% endblock %}
