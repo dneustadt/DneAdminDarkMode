@@ -9,7 +9,12 @@ const stripCssComments = require('gulp-strip-css-comments');
 
 gulp.task('default', (done) => {
     new Promise((resolve) => {
-        const basePath = './../../../../platform/src/Administration/Resources/app/administration/src';
+        let basePath;
+        if (fs.existsSync('./../../../../platform')) {
+            basePath = './../../../../platform/src/Administration/Resources/app/administration/src';
+        } else {
+            basePath = './../../../../src/Administration/Resources/app/administration/src';
+        }
 
         gulp.src([
             basePath + '/app/assets/scss/variables.scss',
@@ -18,7 +23,7 @@ gulp.task('default', (done) => {
             basePath + '/app/assets/scss/mixins.scss',
             basePath + '/app/assets/scss/typography.scss',
             basePath + '/app/assets/scss/directives/!(tooltip).scss',
-            basePath + '/app/component/**/!(sw-admin-menu|sw-alert).scss',
+            basePath + '/app/component/**/!(sw-admin-menu).scss',
             basePath + '/module/**/**.scss',
         ])
         .pipe(concat('app.scss'))
