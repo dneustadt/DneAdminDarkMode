@@ -9,29 +9,24 @@ const stripCssComments = require('gulp-strip-css-comments');
 
 gulp.task('default', (done) => {
     new Promise((resolve) => {
-        let basePath;
-        if (fs.existsSync('./../../../../platform')) {
-            basePath = './../../../../platform/src/Administration/Resources/app/administration/src';
-        } else {
-            basePath = './../../../../src/Administration/Resources/app/administration/src';
-        }
+        const basePath = './../../../../src/Administration/Resources/app/administration/src';
 
         gulp.src([
-            basePath + '/app/assets/scss/variables.scss',
-            './variables.scss',
             basePath + '/app/assets/scss/global.scss',
             basePath + '/app/assets/scss/mixins.scss',
             basePath + '/app/assets/scss/typography.scss',
             basePath + '/app/assets/scss/directives/!(tooltip).scss',
             basePath + '/app/component/**/!(sw-admin-menu).scss',
+            basePath + '/app/asyncComponent/**/*.scss',
             basePath + '/module/**/**.scss',
         ])
         .pipe(concat('app.scss'))
         .pipe(stripCssComments())
+        .pipe(replace('@use "variables";', '@use "variables"; @import "variables";'))
         .pipe(gulp.dest('.'))
         .on('end', resolve);
     }).then(() => {
-        let s = '@use \'sass:math\';';
+        let s = '@use "sass:math"; @use "sass:meta";';
 
         const excludeRegEx = new RegExp('^@import|@include(?!.* sw-label-variant)');
         const propertyRegEx = new RegExp(':(.*?);');
@@ -42,8 +37,6 @@ gulp.task('default', (done) => {
 
         const readStream = fs.createReadStream('app.scss');
         lineReader.eachLine(readStream, (line, last) => {
-            replaceColorsLiteral = replaceColorsLiteral || line === '// start replace literal colors';
-
             if (line.match(excludeRegEx)) {
                 return;
             }
@@ -69,7 +62,7 @@ gulp.task('default', (done) => {
                 return;
             }
 
-            line = replaceColorsLiteral ? line.replace(propertyRegEx, (propertyValue) => {
+            line = line.replace(propertyRegEx, (propertyValue) => {
                 if (propertyValue.match(variableRegEx)) {
                     return propertyValue;
                 }
@@ -81,7 +74,7 @@ gulp.task('default', (done) => {
 
                     return colorMappings[matched];
                 });
-            }) : line;
+            });
 
             if(line.match(variableRegEx)) {
                 s += line.replace(/lighten\(|darken\(/gi, (matched) => {
