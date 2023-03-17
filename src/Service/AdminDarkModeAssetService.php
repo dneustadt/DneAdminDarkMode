@@ -124,6 +124,12 @@ class AdminDarkModeAssetService extends AssetService
                     continue;
                 }
 
+                if ($selector === ':root') {
+                    $newSelectors[] = ':root body.is-dark-mode';
+
+                    continue;
+                }
+
                 if (str_starts_with($selector, 'body ')) {
                     $selector = substr($selector, 5);
                 }
