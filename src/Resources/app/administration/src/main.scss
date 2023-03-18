@@ -1,4 +1,4 @@
-body.is-dark-mode {
+:root[dark-theme="true"] {
     @import "ace";
     @import "flatpickr";
 }

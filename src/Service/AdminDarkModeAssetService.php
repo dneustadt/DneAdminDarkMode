@@ -118,24 +118,14 @@ class AdminDarkModeAssetService extends AssetService
             foreach ($originalSelectors as $originalSelector) {
                 $selector = $originalSelector instanceof Selector ? $originalSelector->getSelector() : $originalSelector;
 
-                if ($selector === 'body') {
-                    $newSelectors[] = 'body.is-dark-mode';
-
-                    continue;
-                }
-
                 if ($selector === ':root') {
-                    $newSelectors[] = ':root body.is-dark-mode';
+                    $newSelectors[] = ':root[dark-theme="true"]';
 
                     continue;
-                }
-
-                if (str_starts_with($selector, 'body ')) {
-                    $selector = substr($selector, 5);
                 }
 
                 $newSelectors[] = sprintf(
-                    'body.is-dark-mode %s',
+                    '[dark-theme="true"] %s',
                     $selector
                 );
             }
@@ -249,6 +239,11 @@ class AdminDarkModeAssetService extends AssetService
     {
         $lightnessIncrement = ($lightness / 100) * 10;
         $lightness = min(100 - $lightness + $lightnessIncrement, 100);
+
+        if ($hue + $saturation === 0.0) {
+            $hue = 210.0;
+            $saturation = 10.0;
+        }
 
         if ($hsl) {
             return [
