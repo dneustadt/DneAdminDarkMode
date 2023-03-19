@@ -348,6 +348,14 @@ class AdminDarkModeAssetService extends AssetService
             if ($selector === '.sw-modal') {
                 return true;
             }
+
+            if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--selection:before') {
+                return true;
+            }
+
+            if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--actions:before') {
+                return true;
+            }
         }
 
         return false;
