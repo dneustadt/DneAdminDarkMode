@@ -4,6 +4,7 @@ namespace Dne\AdminDarkMode\Service;
 
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemOperator;
+use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\Property\Selector;
@@ -62,9 +63,11 @@ class AdminDarkModeAssetService extends AssetService
                 continue;
             }
 
+            $css = $this->filesystem->read($file->path());
+
             $this->filesystem->write(
                 $file->path(),
-                $this->enrichCss($this->filesystem->read($file->path()))
+                $css . \PHP_EOL . $this->enrichCss($css)
             );
         }
     }
@@ -72,6 +75,7 @@ class AdminDarkModeAssetService extends AssetService
     private function enrichCss(string $css): string
     {
         $document = (new Parser($css))->parse();
+        $newDocument = new Document();
 
         foreach ($document->getContents() as $ruleSet) {
             if (!$ruleSet instanceof DeclarationBlock) {
@@ -88,7 +92,7 @@ class AdminDarkModeAssetService extends AssetService
                 $value = $rule->getValue();
                 $newRule = new Rule($rule->getRule());
 
-                if ($value instanceof Color && $color = $this->handleColorValue(clone $value, $rule)) {
+                if ($value instanceof Color && $color = $this->handleColorValue($value, $rule)) {
                     $newRule->setValue($color);
                     $newRule->setIsImportant($rule->getIsImportant());
                     $newBlock->addRule($newRule);
@@ -98,7 +102,6 @@ class AdminDarkModeAssetService extends AssetService
                     continue;
                 }
 
-                $value = clone $value;
                 $foundColor = $this->handleValueList($value, $rule);
 
                 if (!$foundColor) {
@@ -131,10 +134,10 @@ class AdminDarkModeAssetService extends AssetService
             }
 
             $newBlock->setSelectors($newSelectors);
-            $document->append($newBlock);
+            $newDocument->append($newBlock);
         }
 
-        return $document->render(OutputFormat::createCompact());
+        return $newDocument->render(OutputFormat::createCompact());
     }
 
     private function handleValueList(ValueList $valueList, Rule $rule, bool &$foundColor = false): bool
@@ -147,7 +150,7 @@ class AdminDarkModeAssetService extends AssetService
 
         $newComponents = [];
         foreach ($components as $component) {
-            if ($component instanceof Color && $color = $this->handleColorValue(clone $component, $rule)) {
+            if ($component instanceof Color && $color = $this->handleColorValue($component, $rule)) {
                 $newComponents[] = $color;
                 $foundColor = true;
 
@@ -155,7 +158,6 @@ class AdminDarkModeAssetService extends AssetService
             }
 
             if ($component instanceof RuleValueList || $component instanceof CSSFunction) {
-                $component = clone $component;
                 $this->handleValueList($component, $rule, $foundColor);
             }
 
