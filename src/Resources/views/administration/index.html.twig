@@ -5,10 +5,9 @@
         if (localStorage.getItem('isDarkMode')) {
             document.documentElement.setAttribute('dark-theme', localStorage.getItem('isDarkMode'));
         } else {
-            document.documentElement.setAttribute(
-                'dark-theme',
-                window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'true' : 'false'
-            );
+            const dneDarkMode = window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'true' : 'false';
+            localStorage.setItem('isDarkMode', dneDarkMode);
+            document.documentElement.setAttribute('dark-theme', dneDarkMode);
         }
     </script>
     {{ parent() }}
