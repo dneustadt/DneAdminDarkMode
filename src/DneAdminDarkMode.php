@@ -3,12 +3,10 @@
 namespace Dne\AdminDarkMode;
 
 use Dne\AdminDarkMode\DependencyInjection\AdminDarkModeCompilerPass;
-use Dne\AdminDarkMode\Service\AdminDarkModeAssetService;
+use Dne\AdminDarkMode\Service\AdminDarkModeCompiler;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;
 use Shopware\Core\Framework\Plugin\Context\UpdateContext;
-use Shopware\Core\Framework\Plugin\Util\AssetService;
-use Shopware\Core\Kernel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DneAdminDarkMode extends Plugin
@@ -34,16 +32,8 @@ class DneAdminDarkMode extends Plugin
 
     private function assetsInstall(): void
     {
-        /** @var Kernel $kernel */
-        $kernel = $this->container->get('kernel');
-        /** @var AdminDarkModeAssetService $assetService */
-        $assetService = $this->container->get(AssetService::class);
-        $assetService->darkModeCompile = true;
-
-        foreach ($kernel->getBundles() as $bundle) {
-            $assetService->copyAssetsFromBundle($bundle->getName());
-        }
-
-        $assetService->darkModeCompile = false;
+        /** @var AdminDarkModeCompiler $compiler */
+        $compiler = $this->container->get(AdminDarkModeCompiler::class);
+        $compiler->compileBundleAssets();
     }
 }
