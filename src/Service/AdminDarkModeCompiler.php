@@ -2,8 +2,7 @@
 
 namespace Dne\AdminDarkMode\Service;
 
-use League\Flysystem\FileAttributes;
-use League\Flysystem\FilesystemOperator;
+use League\Flysystem\FilesystemInterface;
 use Sabberworm\CSS\CSSList\Document;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
@@ -26,7 +25,7 @@ class AdminDarkModeCompiler
 {
     private const DARK_MODE_COMMENT = '/* DneAdminDarkMode START */';
 
-    private FilesystemOperator $filesystem;
+    private FilesystemInterface $filesystem;
 
     private KernelInterface $kernel;
 
@@ -35,7 +34,7 @@ class AdminDarkModeCompiler
     private ParameterBagInterface $parameterBag;
 
     public function __construct(
-        FilesystemOperator $filesystem,
+        FilesystemInterface $filesystem,
         KernelInterface $kernel,
         KernelPluginLoader $pluginLoader,
         ParameterBagInterface $parameterBag
@@ -73,27 +72,26 @@ class AdminDarkModeCompiler
             $bundleName === 'administration' ? 'static/css' : 'administration/css'
         );
 
-        if (!$this->filesystem->directoryExists($dir)) {
+        if (!$this->filesystem->has($dir)) {
             return;
         }
 
-        $directoryListing = $this->filesystem->listContents($dir)->getIterator();
+        $directoryListing = $this->filesystem->listContents($dir);
         $colorRegex = '/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\b|rgb\([^)]*\)|rgba\([^)]*\)|hsl\([^)]*\)|hsla\([^)]*\)/';
 
-        /** @var FileAttributes $file */
         foreach ($directoryListing as $file) {
-            if (!$file->isFile() || !str_ends_with($file->path(), '.css')) {
+            if ($file['type'] !== 'file' || !str_ends_with($file['path'], '.css')) {
                 continue;
             }
 
-            [$css] = explode(self::DARK_MODE_COMMENT, $this->filesystem->read($file->path()));
+            [$css] = explode(self::DARK_MODE_COMMENT, $this->filesystem->read($file['path']));
 
             if (!preg_match($colorRegex, $css)) {
                 continue;
             }
 
-            $this->filesystem->write(
-                $file->path(),
+            $this->filesystem->put(
+                $file['path'],
                 $css . $this->enrichCss($css)
             );
         }
