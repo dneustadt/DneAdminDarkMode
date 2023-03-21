@@ -109,7 +109,8 @@ class AdminDarkModeCompiler
                 continue;
             }
 
-            if ($this->hasIgnoredSelector($ruleSet)) {
+            $selectors = $this->filterSelectors($ruleSet);
+            if (empty($selectors)) {
                 continue;
             }
 
@@ -143,24 +144,7 @@ class AdminDarkModeCompiler
                 continue;
             }
 
-            $originalSelectors = $ruleSet->getSelectors();
-            $newSelectors = [];
-            foreach ($originalSelectors as $originalSelector) {
-                $selector = $originalSelector instanceof Selector ? $originalSelector->getSelector() : $originalSelector;
-
-                if ($selector === ':root') {
-                    $newSelectors[] = ':root[dark-theme="true"]';
-
-                    continue;
-                }
-
-                $newSelectors[] = sprintf(
-                    '[dark-theme="true"] %s',
-                    $selector
-                );
-            }
-
-            $newBlock->setSelectors($newSelectors);
+            $newBlock->setSelectors($selectors);
             $newDocument->append($newBlock);
         }
 
@@ -355,41 +339,53 @@ class AdminDarkModeCompiler
         ];
     }
 
-    private function hasIgnoredSelector(DeclarationBlock $block): bool
+    private function filterSelectors(DeclarationBlock $block): array
     {
+        $filteredSelectors = [];
         foreach ($block->getSelectors() as $selector) {
             $selector = $selector instanceof Selector ? $selector->getSelector() : $selector;
 
             if (str_starts_with($selector, '.sw-admin-menu')) {
-                return true;
+                continue;
             }
 
             if (str_starts_with($selector, '.sw-sales-channel-menu')) {
-                return true;
+                continue;
             }
 
             if (str_starts_with($selector, '.sw-version')) {
-                return true;
+                continue;
             }
 
             if (str_starts_with($selector, '.sw-alert--system')) {
-                return true;
+                continue;
             }
 
             if ($selector === '.sw-modal') {
-                return true;
+                continue;
             }
 
             if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--selection:before') {
-                return true;
+                continue;
             }
 
             if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--actions:before') {
-                return true;
+                continue;
             }
+
+            if ($selector === ':root') {
+                $filteredSelectors[] = ':root[dark-theme="true"]';
+
+                continue;
+            }
+
+            $filteredSelectors[] = sprintf(
+                '[dark-theme="true"] %s',
+                $selector
+            );
         }
 
-        return false;
+        return $filteredSelectors;
     }
 
     /**
