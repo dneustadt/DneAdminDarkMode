@@ -11,6 +11,6 @@ class AdminDarkModeCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition(AssetService::class)->setClass(AdminDarkModeAssetService::class);
+        $container->getDefinition(AssetService::class)->setClass(AdminDarkModeAssetService::class)->setPublic(true);
     }
 }

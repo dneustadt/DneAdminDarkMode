@@ -20,7 +20,11 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 class AdminDarkModeAssetService extends AssetService
 {
+    private const DARK_MODE_COMMENT = '/* DneAdminDarkMode START */';
+
     private FilesystemOperator $filesystem;
+
+    public bool $darkModeCompile = false;
 
     public function __construct(...$args)
     {
@@ -37,7 +41,9 @@ class AdminDarkModeAssetService extends AssetService
 
     public function copyAssets(BundleInterface $bundle): void
     {
-        parent::copyAssets($bundle);
+        if (!$this->darkModeCompile) {
+            parent::copyAssets($bundle);
+        }
 
         $bundleName = mb_strtolower($bundle->getName());
 
@@ -56,6 +62,7 @@ class AdminDarkModeAssetService extends AssetService
         }
 
         $directoryListing = $this->filesystem->listContents($dir)->getIterator();
+        $colorRegex = '/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\b|rgb\([^)]*\)|rgba\([^)]*\)|hsl\([^)]*\)|hsla\([^)]*\)/';
 
         /** @var FileAttributes $file */
         foreach ($directoryListing as $file) {
@@ -63,11 +70,15 @@ class AdminDarkModeAssetService extends AssetService
                 continue;
             }
 
-            $css = $this->filesystem->read($file->path());
+            [$css] = explode(self::DARK_MODE_COMMENT, $this->filesystem->read($file->path()));
+
+            if (!preg_match($colorRegex, $css)) {
+                continue;
+            }
 
             $this->filesystem->write(
                 $file->path(),
-                $css . \PHP_EOL . $this->enrichCss($css)
+                $css . $this->enrichCss($css)
             );
         }
     }
@@ -137,7 +148,7 @@ class AdminDarkModeAssetService extends AssetService
             $newDocument->append($newBlock);
         }
 
-        return $newDocument->render(OutputFormat::createCompact());
+        return self::DARK_MODE_COMMENT . $newDocument->render(OutputFormat::createCompact());
     }
 
     private function handleValueList(ValueList $valueList, Rule $rule, bool &$foundColor = false): bool
@@ -342,6 +353,10 @@ class AdminDarkModeAssetService extends AssetService
             }
 
             if (str_starts_with($selector, '.sw-version')) {
+                return true;
+            }
+
+            if (str_starts_with($selector, '.sw-alert--system')) {
                 return true;
             }
 

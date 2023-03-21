@@ -3,13 +3,12 @@
 namespace Dne\AdminDarkMode;
 
 use Dne\AdminDarkMode\DependencyInjection\AdminDarkModeCompilerPass;
+use Dne\AdminDarkMode\Service\AdminDarkModeAssetService;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;
-use Shopware\Core\Framework\Plugin\Context\UninstallContext;
 use Shopware\Core\Framework\Plugin\Context\UpdateContext;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
+use Shopware\Core\Framework\Plugin\Util\AssetService;
+use Shopware\Core\Kernel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DneAdminDarkMode extends Plugin
@@ -33,22 +32,18 @@ class DneAdminDarkMode extends Plugin
         $this->assetsInstall();
     }
 
-    public function uninstall(UninstallContext $uninstallContext): void
-    {
-        if (!$uninstallContext->keepUserData()) {
-            $this->assetsInstall();
-        }
-    }
-
     private function assetsInstall(): void
     {
-        $application = new Application($this->container->get('kernel'));
-        $application->setAutoExit(false);
+        /** @var Kernel $kernel */
+        $kernel = $this->container->get('kernel');
+        /** @var AdminDarkModeAssetService $assetService */
+        $assetService = $this->container->get(AssetService::class);
+        $assetService->darkModeCompile = true;
 
-        $input = new ArrayInput([
-            'command' => 'assets:install',
-        ]);
+        foreach ($kernel->getBundles() as $bundle) {
+            $assetService->copyAssetsFromBundle($bundle->getName());
+        }
 
-        $application->run($input, new NullOutput());
+        $assetService->darkModeCompile = false;
     }
 }
