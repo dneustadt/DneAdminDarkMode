@@ -1,6 +1,14 @@
 {% sw_extends 'administration/index.html.twig' %}
 
-{% block administration_scripts %}
+{% block administration_favicons %}
+    <script nonce="{{ cspNonce }}" type="text/javascript">
+        if (localStorage.getItem('isDarkMode')) {
+            document.documentElement.setAttribute('dark-theme', localStorage.getItem('isDarkMode'));
+        } else {
+            const dneDarkMode = window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ? 'true' : 'false';
+            localStorage.setItem('isDarkMode', dneDarkMode);
+            document.documentElement.setAttribute('dark-theme', dneDarkMode);
+        }
+    </script>
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/dneadmindarkmode/administration/js/dne-admin-dark-mode.js') }}"></script>
 {% endblock %}

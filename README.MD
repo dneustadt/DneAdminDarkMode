@@ -10,8 +10,10 @@ The plugin offers the following features:
 
 Requirements
 -----
-* 2.0.0
+* 2.2.0
     * Shopware >= 6.5
+* 2.1.0
+    * Shopware >= 6.4.16
 * 1.1.0
     * Shopware >= 6.4.9
 * 1.0.0
@@ -19,8 +21,8 @@ Requirements
 
 Screenshots
 -----
-![Dark Mode Product Listing](https://github.com/dneustadt/DneAdminDarkMode/blob/main/dist/admin-dark-mode-1.png?raw=true)
-![Dark Mode Product Editing](https://github.com/dneustadt/DneAdminDarkMode/blob/main/dist/admin-dark-mode-2.png?raw=true)
+![Dark Mode Product Listing](dist/admin-dark-mode-1.png?raw=true)
+![Dark Mode Product Editing](dist/admin-dark-mode-2.png?raw=true)
 
 Installation
 ====

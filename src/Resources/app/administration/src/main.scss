@@ -1,20 +1,10 @@
-@import "~scss/variables";
-
-body:where(.is-dark-mode) {
-    @import "colors";
+:root[dark-theme="true"] {
     @import "ace";
     @import "flatpickr";
+}
 
-    .sw-version {
-        .sw-version__title,
-        .sw-version__info {
-            color: $color-white;
-        }
-    }
-
-    .sw-sales-channel-menu .sw-admin-menu__headline .sw-admin-menu__headline_text a {
-        color: $color-white;
-    }
+#app {
+    background: inherit;
 }
 
 .dne-dark-mode {
