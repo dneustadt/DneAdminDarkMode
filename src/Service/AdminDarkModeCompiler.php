@@ -17,11 +17,13 @@ use Sabberworm\CSS\Value\ValueList;
 use Shopware\Core\Framework\Parameter\AdditionalBundleParameters;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\KernelPluginLoader\KernelPluginLoader;
+use Shopware\Core\Framework\Update\Event\UpdatePostFinishEvent;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class AdminDarkModeCompiler
+class AdminDarkModeCompiler implements EventSubscriberInterface
 {
     private const DARK_MODE_COMMENT = '/* DneAdminDarkMode START */';
 
@@ -43,6 +45,13 @@ class AdminDarkModeCompiler
         $this->kernel = $kernel;
         $this->pluginLoader = $pluginLoader;
         $this->parameterBag = $parameterBag;
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            UpdatePostFinishEvent::class => 'compileBundleAssets',
+        ];
     }
 
     public function compileBundleAssets(): void
@@ -368,6 +377,14 @@ class AdminDarkModeCompiler
             }
 
             if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--actions:before') {
+                continue;
+            }
+
+            if ($selector === '.sw-login .sw-login__image-headlines') {
+                continue;
+            }
+
+            if ($selector === '.sw-login .sw-login__badge svg') {
                 continue;
             }
 
