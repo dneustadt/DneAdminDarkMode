@@ -9,6 +9,7 @@
             <argument type="service" id="kernel"/>
             <argument type="service" id="Shopware\Core\Framework\Plugin\KernelPluginLoader\KernelPluginLoader"/>
             <argument type="service" id="parameter_bag"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
     </services>
 </container>
