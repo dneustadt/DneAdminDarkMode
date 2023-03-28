@@ -1,6 +1,25 @@
 :root[dark-theme="true"] {
     @import "ace";
     @import "flatpickr";
+
+    .sw-cms-list-item {
+        .sw-cms-list-item__image {
+            filter: invert(1) hue-rotate(180deg);
+        }
+    }
+
+    .sw-media-folder-item {
+        .sw-media-folder-item__folder-thumbnails {
+            filter: invert(1) hue-rotate(180deg);
+        }
+    }
+
+    .sw-cms-list-item {
+        .sw-cms-list-item__is-default {
+            bottom: 4px;
+            left: 4px;
+        }
+    }
 }
 
 #app {
@@ -8,13 +27,9 @@
 }
 
 .dne-dark-mode {
-    min-width: 65px;
+    display: flex;
 
-    .sw-icon {
-        float: left;
-    }
     .sw-field--switch {
-        float: left;
-        margin: -10px 10px 0 5px;
+        margin: -10px 0 0 5px;
     }
 }

@@ -370,23 +370,23 @@ class AdminDarkModeCompiler implements EventSubscriberInterface
                 continue;
             }
 
-            if ($selector === '.sw-modal') {
+            if (str_starts_with($selector, '.sw-tooltip')) {
                 continue;
             }
 
-            if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--selection:before') {
+            if (str_starts_with($selector, '.sw-arrow-field')) {
                 continue;
             }
 
-            if ($selector === '.sw-data-grid.is--scroll-x .sw-data-grid__cell--actions:before') {
-                continue;
-            }
-
-            if ($selector === '.sw-login .sw-login__image-headlines') {
-                continue;
-            }
-
-            if ($selector === '.sw-login .sw-login__badge svg') {
+            if (\in_array($selector, [
+                '.sw-modal',
+                '.sw-data-grid.is--scroll-x .sw-data-grid__cell--selection:before',
+                '.sw-data-grid.is--scroll-x .sw-data-grid__cell--actions:before',
+                '.sw-login .sw-login__image-headlines',
+                '.sw-login .sw-login__badge svg',
+                '.sw-cms-list-item .sw-cms-list-item__image',
+                '.sw-cms-list-item .sw-cms-list-item__is-default',
+            ], true)) {
                 continue;
             }
 
