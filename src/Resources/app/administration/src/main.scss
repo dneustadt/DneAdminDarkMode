@@ -28,6 +28,22 @@
             left: 4px;
         }
     }
+
+    .sw-media-field {
+        .sw-media-field__empty-preview {
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUfIiUXGRtzBv/oAAAAD0lEQVQI12P4z4Ad4ZAAAH6/D/Hgw85/AAAAAElFTkSuQmCC');
+        }
+    }
+
+    .sw-arrow-field {
+        .sw-arrow-field__arrow {
+            svg {
+                polyline {
+                    stroke: #303c47;
+                }
+            }
+        }
+    }
 }
 
 #app {

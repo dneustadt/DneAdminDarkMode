@@ -424,6 +424,7 @@ class AdminDarkModeCompiler implements EventSubscriberInterface
                 '.sw-cms-list-item .sw-cms-list-item__image',
                 '.sw-cms-list-item .sw-cms-list-item__is-default',
                 '.sw-cms-create-wizard__step-3 .sw-cms-create-wizard__page-preview .sw-cms-create-wizard__preview_image',
+                '.sw-condition-type-select',
             ], true)) {
                 continue;
             }
