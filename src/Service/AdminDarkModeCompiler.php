@@ -145,6 +145,8 @@ class AdminDarkModeCompiler implements EventSubscriberInterface
                     continue;
                 }
 
+                $this->handleColorInShorthands($value, $newRule);
+
                 $newRule->setValue($value);
                 $newBlock->addRule($newRule);
             }
@@ -189,13 +191,48 @@ class AdminDarkModeCompiler implements EventSubscriberInterface
         return $foundColor;
     }
 
-    private function handleColorValue(Color $color, Rule $rule): ?Color
+    private function handleColorInShorthands(ValueList $valueList, Rule $rule): void
     {
-        if ($rule->getRule() === 'box-shadow') {
-            return new Color(['r' => new Size(10), 'g' => new Size(10), 'b' => new Size(10)]);
+        if (!\in_array($rule->getRule(), ['background', 'border'], true) || $valueList instanceof CSSFunction) {
+            return;
         }
 
+        $colors = array_values(array_filter($valueList->getListComponents(), function ($component): bool {
+            return $component instanceof Color;
+        }));
+
+        if (\count($colors) !== 1) {
+            return;
+        }
+
+        switch ($rule->getRule()) {
+            case 'background':
+                $rule->setRule('background-color');
+                $valueList->setListComponents($colors);
+
+                break;
+            case 'border':
+                $rule->setRule('border-color');
+                $valueList->setListComponents($colors);
+
+                break;
+        }
+    }
+
+    private function handleColorValue(Color $color, Rule $rule): ?Color
+    {
         $components = $color->getListComponents();
+
+        if ($rule->getRule() === 'box-shadow') {
+            $shadowColor = ['r' => new Size(0), 'g' => new Size(0), 'b' => new Size(0)];
+
+            if (isset($components['a']) && $components['a'] instanceof Size) {
+                $shadowColor['a'] = new Size($components['a']->getSize());
+            }
+
+            return new Color($shadowColor);
+        }
+
         $r = $components['r'] ?? null;
         $g = $components['g'] ?? null;
         $b = $components['b'] ?? null;
@@ -386,6 +423,7 @@ class AdminDarkModeCompiler implements EventSubscriberInterface
                 '.sw-login .sw-login__badge svg',
                 '.sw-cms-list-item .sw-cms-list-item__image',
                 '.sw-cms-list-item .sw-cms-list-item__is-default',
+                '.sw-cms-create-wizard__step-3 .sw-cms-create-wizard__page-preview .sw-cms-create-wizard__preview_image',
             ], true)) {
                 continue;
             }
