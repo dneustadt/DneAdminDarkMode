@@ -4,13 +4,21 @@
 
     .sw-cms-list-item {
         .sw-cms-list-item__image {
-            filter: invert(1) hue-rotate(180deg);
+            filter: invert(1) hue-rotate(180deg) brightness(1.5);
         }
     }
 
     .sw-media-folder-item {
         .sw-media-folder-item__folder-thumbnails {
-            filter: invert(1) hue-rotate(180deg);
+            filter: invert(1) hue-rotate(180deg) brightness(1.5);
+        }
+    }
+
+    .sw-cms-create-wizard__step-3 {
+        .sw-cms-create-wizard__page-preview {
+            .sw-cms-create-wizard__preview_image {
+                filter: invert(1) hue-rotate(180deg) brightness(1.5);
+            }
         }
     }
 
