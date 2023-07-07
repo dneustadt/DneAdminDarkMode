@@ -10,6 +10,8 @@ The plugin offers the following features:
 
 Requirements
 -----
+* 2.2.5
+    * Shopware >= 6.5.3
 * 2.2.0
     * Shopware >= 6.5
 * 2.1.0
