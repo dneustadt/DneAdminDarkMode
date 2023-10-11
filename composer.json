@@ -1,11 +1,11 @@
 {
     "name": "dne/admin-dark-mode",
     "description": "Administration Dark Mode",
-    "version": "2.2.5",
+    "version": "2.2.6",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "require": {
-        "shopware/core": "~v6.5.3"
+        "shopware/core": "~v6.5.6"
     },
     "authors": [
         {

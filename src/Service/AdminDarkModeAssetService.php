@@ -22,9 +22,9 @@ class AdminDarkModeAssetService extends AssetService
         }
     }
 
-    public function copyAssets(BundleInterface $bundle): void
+    public function copyAssets(BundleInterface $bundle, bool $force = false): void
     {
-        parent::copyAssets($bundle);
+        parent::copyAssets($bundle, $force);
 
         $this->compiler->compileAssets($bundle);
     }
